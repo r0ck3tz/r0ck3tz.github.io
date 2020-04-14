@@ -37,6 +37,7 @@ Our strategy for exploiting binary will be following:
 2. Send payload to perform ret2libc attack.
 
 Lets leak libc printf address and do the calculations.
+
 {% highlight python %}
 pop_rdi = 0x400783 # : pop rdi ; ret
 main = 0x400698
