@@ -26,7 +26,7 @@ In this challenge we are dealing with 32bit statically linked arm binary. It con
 
 ![code decompiled][decompiled]
 
-Sending 512 bytes causes crash that overwrite program counter (pc) at offset 144. Since the binary is compiled with NX bit it is required to use ROP technique.
+Sending 512 bytes causes crash that overwrite program counter (pc) at offset 144. Since the binary is compiled with NX bit it is required to use ROP technique for exploitation.  
 
 {% highlight python %}
 payload = (
@@ -48,12 +48,11 @@ payload = (
 We compose our payload with 3 gadgets.
 1. Gadget responsible for adjusting stack - `pop {r3, pc}`
 2. Gadget setting up registers to our values - `pop {r0, r1, r2, r6, r7, pc}`
-
-r0 - arg1 - address of /bin/sh (can be found in the binary)
-r1 - arg2 - 0x0
-r2 - arg3 - 0x0
-r6 - junk 
-r7 - execve syscall number - 0xb
+* `r0` - arg1 - address of `/bin/sh` (can be found in the binary)
+* `r1` - arg2 - `0x0`
+* `r2` - arg3 - `0x0`
+* `r6` - junk 
+* `r7` - execve syscall number - `0xb`
 
 3. Gadget that executes syscall - `svc $0, pop r{7, pc}`
 
