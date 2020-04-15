@@ -26,7 +26,7 @@ In this challenge we are dealing with 32bit statically linked arm binary. It con
 
 ![code decompiled][decompiled]
 
-Sending 512 bytes casues crash that overwrite program counter (pc) at offset 144. Since the binary is compiled with NX bit it is required to use ROP technique.
+Sending 512 bytes causes crash that overwrite program counter (pc) at offset 144. Since the binary is compiled with NX bit it is required to use ROP technique.
 
 {% highlight python %}
 payload = (
